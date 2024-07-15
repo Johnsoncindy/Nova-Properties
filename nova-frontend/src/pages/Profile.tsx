@@ -12,10 +12,8 @@ interface UserData {
 }
 
 const ProfilePage: React.FC = () => {
-  // Simulating logged-in user's agent name
   const agentName = "John Doe";
 
-  // Simulating user data without savedListings initially
   const userData: UserData = {
     // savedListings: [1, 2, 3] // Uncomment this line to simulate saved listings
   };

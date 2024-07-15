@@ -17,8 +17,7 @@ const ProfilePage: React.FC = () => {
   const userData: UserData = {
     // savedListings: [1, 2, 3] // Uncomment this line to simulate saved listings
   };
-
-  // Function to determine if there are listings for the user
+  
   const hasListings = properties.some(property => property.agent === agentName);
 
   // Check for savedListings in userData, default to an empty array if not present

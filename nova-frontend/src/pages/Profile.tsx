@@ -6,12 +6,18 @@ import ProfilePropertyList from '../components/properties/ProfilePropertyList';
 import { properties } from '../data/Property';
 import { Button } from 'flowbite-react';
 import './ProfilePage.css';  // Import the CSS file
+import { useNavigate } from 'react-router-dom';
 
 interface UserData {
   savedListings?: number[]; // Array of property IDs
 }
 
 const ProfilePage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const UpdateProfile = () => {
+    navigate("/profile/update-profile")
+  }
   const agentName = "John Doe";
 
   const userData: UserData = {
@@ -29,7 +35,7 @@ const ProfilePage: React.FC = () => {
         <div className="p-4 lg:p-12 flex flex-col gap-12">
           <div className="flex justify-between items-center">
             <h1 className="font-light text-xl">User Information</h1>
-            <Button className="px-6 py-3 bg-[#ffc72c] cursor-pointer border-none">Update Profile</Button>
+            <Button className="px-6 py-3 bg-[#ffc72c] cursor-pointer border-none" onClick={UpdateProfile}>Update Profile</Button>
           </div>
           <Profile />
           {hasListings && (
@@ -46,7 +52,7 @@ const ProfilePage: React.FC = () => {
           )}
         </div>
       </div>
-      <div className="flex-2 bg-[#ffc72c] h-full overflow-y-auto hide-scrollbar lg:h-auto lg:overflow-visible">
+      <div className="hidden lg:flex flex-2 bg-[#ffc72c] h-full overflow-y-auto hide-scrollbar lg:h-auto lg:overflow-visible">
         <div className="p-4 lg:p-8">
           <Chat />
         </div>

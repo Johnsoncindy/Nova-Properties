@@ -11,6 +11,8 @@ import Contact from './pages/Contact';
 import Faq from './pages/Faq';
 import About from './pages/About';
 import MeetOurAgents from './pages/Agents';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import UpdateProfile from './components/user/UpdateProfile';
 
 const App: React.FC = () => {
     return (
@@ -20,7 +22,16 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/property/:id" element={<Property />} />
-                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/profile" element={
+                        <ProtectedRoute>
+                            <ProfilePage />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/profile/update-profile" element={
+                        <ProtectedRoute>
+                            <UpdateProfile />
+                        </ProtectedRoute>
+                    } />
                     <Route path="/about" element={<About />} />
                     <Route path="/agents" element={<MeetOurAgents />} />
                     <Route path="/contact" element={<Contact />} />

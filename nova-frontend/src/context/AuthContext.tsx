@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// AuthContext.tsx
+
 import { createContext, useState, ReactNode, FC, useEffect } from "react";
 
-// Define the type for the context value
 interface AuthContextType {
     currentUser: any;
+    authenticated: boolean;
     updateUser: (data: any) => void;
 }
 
-// Provide a default value for the context
 const defaultAuthContextValue: AuthContextType = {
     currentUser: null,
+    authenticated: false,
     updateUser: () => {},
 };
 
@@ -25,6 +27,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         return storedUser ? JSON.parse(storedUser) : null;
     });
 
+    const authenticated = !!currentUser; // Check if currentUser exists
+
     const updateUser = (data: any) => {
         setCurrentUser(data);
     }
@@ -34,7 +38,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     }, [currentUser]);
 
     return (
-        <AuthContext.Provider value={{ currentUser, updateUser }}>
+        <AuthContext.Provider value={{ currentUser, authenticated, updateUser }}>
             {children}
         </AuthContext.Provider>
     );

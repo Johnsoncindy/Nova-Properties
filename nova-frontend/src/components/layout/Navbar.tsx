@@ -17,16 +17,15 @@ import apiRequest from "../../services/apiRequest";
 import { AuthContext } from "../../context/AuthContext";
 
 const Navbar: React.FC = () => {
-  const {currentUser} = useContext(AuthContext);
+  const {updateUser, currentUser} = useContext(AuthContext);
 
   const navigate = useNavigate();
   
   const handleLogout = async () => {
     try {
-      const res = await apiRequest.post("/auth/logout");
-      localStorage.removeItem("user");
+      await apiRequest.post("/auth/logout");
+      updateUser(null);
       navigate("/");
-      console.log(res);
     } catch (err) {
       console.log(err);     
     }
@@ -83,7 +82,7 @@ const Navbar: React.FC = () => {
               Profile
             </DropdownItem>
             <DropdownDivider />
-            <DropdownItem as={Button} to={handleLogout}>
+            <DropdownItem as={Button} onClick={handleLogout}>
               Logout
             </DropdownItem>
           </Dropdown>
